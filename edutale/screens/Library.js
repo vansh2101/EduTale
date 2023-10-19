@@ -11,6 +11,9 @@ import PlayModal from '../components/PlayModal';
 
 
 export default function Library() {
+
+  const [playModal, setPlayModal] = useState(false);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -27,12 +30,12 @@ export default function Library() {
       <InputBox icon={'search'} placeholder={'Search your Library'} style={{alignSelf: 'center', width: wp('90%')}} />
 
       <View style={styles.main}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card onPress={() => setPlayModal(true)}/>
+        <Card onPress={() => setPlayModal(true)}/>
+        <Card onPress={() => setPlayModal(true)}/>
+        <Card onPress={() => setPlayModal(true)}/>
+        <Card onPress={() => setPlayModal(true)}/>
+        <Card onPress={() => setPlayModal(true)}/>
       </View>
 
       </ScrollView>
@@ -42,6 +45,8 @@ export default function Library() {
           <Ionicons name="add" size={35} color="#ccc" />
         </View>
       </TouchableNativeFeedback>
+
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} />
 
     </View>
   )

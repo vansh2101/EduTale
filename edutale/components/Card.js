@@ -4,9 +4,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Ionicons } from '@expo/vector-icons';
 
 
-export default function Card() {
+export default function Card({onPress}) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={require('../assets/images/cover.jpeg')} style={styles.img} />
 
       <View style={{marginLeft: 7}}>

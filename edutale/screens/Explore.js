@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import Constant from 'expo-constants'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -6,9 +6,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 //? components
 import InputBox from '../components/InputBox';
 import Card from '../components/Card';
+import PlayModal from '../components/PlayModal';
 
 
 export default function Explore() {
+
+  const [playModal, setPlayModal] = useState(false);
+
   return (
     <View style={styles.container}>
       
@@ -19,16 +23,19 @@ export default function Explore() {
       <View style={{height: hp('73%')}}>
         <ScrollView>
           <View style={styles.main}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+          <Card onPress={() => setPlayModal(true)}/>
+          <Card onPress={() => setPlayModal(true)}/>
+          <Card onPress={() => setPlayModal(true)}/>
+          <Card onPress={() => setPlayModal(true)}/>
+          <Card onPress={() => setPlayModal(true)}/>
+              
           </View>
 
         </ScrollView>
       </View>
+
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} />
+
     </View>
   )
 }
