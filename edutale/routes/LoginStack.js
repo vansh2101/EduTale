@@ -7,6 +7,7 @@ import Home from '../screens/Home';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Tabs from './Tabs';
+import Comic from '../screens/Comic';
 
 
 
@@ -20,6 +21,7 @@ function LoginStack({onReady}) {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={SignUp} />
         <Stack.Screen name="main" component={Tabs} />
+        <Stack.Screen name="comic" component={Comic} />
       </Stack.Navigator>
     </NavigationContainer>
   );

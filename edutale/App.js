@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+
 import React, {useState, useCallback, useEffect} from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';

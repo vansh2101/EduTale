@@ -1,0 +1,10 @@
+.container{
+    width: 100vw;
+}
+
+
+.block{
+    background-color: pink;
+    width: 100vw;
+    height: 42.5vh;
+}

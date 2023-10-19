@@ -26,7 +26,7 @@ function SignUp({navigation}) {
         <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} />
         <InputBox placeholder={'Confirm Your Password'} icon={'lock-closed'} secure={true} />
 
-        <Btn text={'Register'} style={{marginTop: hp('4%'), paddingVertical: 10}} />
+        <Btn text={'Register'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={() => {navigation.navigate('comic')}} />
     </View>
   );
 }
