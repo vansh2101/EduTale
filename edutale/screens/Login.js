@@ -1,7 +1,14 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+
+//firebase
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/firestore'
 
 //? components
 import InputBox from '../components/InputBox';
@@ -9,6 +16,36 @@ import Btn from '../components/Btn';
 
 
 function Login({navigation}) {
+
+    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const signin = () => {
+      if(email == '') return
+
+      setLoading(true)
+      firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(data => {
+          AsyncStorage.setItem('session', data.user.email).then(data => {
+              setEmail('')
+              setPassword('')
+              navigation.navigate('main')
+              setLoading(false)
+          })
+      })
+      .catch(e => {
+          if (e.code === 'auth/invalid-email') Alert.alert("Email Invalid", 'Please enter a correct email')
+          else if (e.code === 'auth/internal-error') Alert.alert("Password Invalid", 'Please enter a password')
+          else if (e.code === 'auth/wrong-password') Alert.alert("Wrong Password", 'Password Incorrect')
+          else if (e.code === 'auth/user-not-found') Alert.alert("User does not exist", 'User with entered email id does not exist')
+          setEmail('')
+          setPassword('')
+          setLoading(false)
+      })
+  }
+
   return (
     <View style={styles.container}>
         <View style={styles.circle}/>
@@ -20,14 +57,14 @@ function Login({navigation}) {
         <Text style={styles.heading}>Login</Text>
         <Text style={styles.subHeading}>Please Sign In to Continue</Text>
 
-        <InputBox placeholder={'Enter Your Email'} icon={'mail'} />
-        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} />
+        <InputBox placeholder={'Enter Your Email'} icon={'mail'} onChangeText={val => setEmail(val)}/>
+        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} onChangeText={val => setPassword(val)}/>
 
         <Pressable>
           <Text style={styles.link}>Forgot your Password?</Text>
         </Pressable>
 
-        <Btn text={'Sign In'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={() => {navigation.navigate('main')}} />
+        <Btn text={'Sign In'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={signin} />
     </View>
   );
 }

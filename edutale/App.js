@@ -1,8 +1,12 @@
 import 'react-native-get-random-values';
-
 import React, {useState, useCallback, useEffect} from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+
+//firebase
+import firebase from 'firebase/compat/app'
+import {firebaseConfig} from './static/firebaseConfig'
+
 
 //? Stacks
 import LoginStack from './routes/LoginStack';
@@ -11,6 +15,8 @@ import LoginStack from './routes/LoginStack';
 export default function App() {
 
   const [appIsReady, setAppIsReady] = useState(false);
+
+  firebase.initializeApp(firebaseConfig)
 
   useEffect(() => {
 	async function prepare(){
