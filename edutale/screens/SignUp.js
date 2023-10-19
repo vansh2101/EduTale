@@ -1,7 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
+
+//firebase
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 //? components
 import InputBox from '../components/InputBox';
@@ -9,6 +15,46 @@ import Btn from '../components/Btn';
 
 
 function SignUp({navigation}) {
+
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+  const [institution, setInstitution] = useState()
+  const [password, setPassword] = useState()
+  const [cpass, setCpass] = useState()
+
+  const signup = () => {
+    if(password !== cpass){
+      Alert.alert('Error', 'Passwords do not match')
+      return
+    }
+
+    if(!name || !email || !institution || !password){
+      Alert.alert('Empty Fields', 'Please fill in all the fields')
+      return
+    }
+
+    const data = {
+      name: name,
+      email: email,
+      institution: institution,
+    }
+
+    firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((data) => {
+          console.log(data)
+      })
+      .catch(e => console.log(e));
+
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(email)
+      .set(data)
+      .then(data => {
+        navigation.navigate('Login')
+      })
+  }
+
   return (
     <View style={styles.container}>
         <View style={styles.circle}/>
@@ -20,11 +66,11 @@ function SignUp({navigation}) {
         <Text style={styles.heading}>Sign Up</Text>
         <Text style={styles.subHeading}>Please Create an Account</Text>
 
-        <InputBox placeholder={'Enter Your Name'} icon={'happy'} />
-        <InputBox placeholder={'Enter Your Email'} icon={'mail'} />
-        <InputBox placeholder={'Enter Your Institution'} icon={'school'} />
-        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} />
-        <InputBox placeholder={'Confirm Your Password'} icon={'lock-closed'} secure={true} />
+        <InputBox placeholder={'Enter Your Name'} icon={'happy'} onChangeText={setName}/>
+        <InputBox placeholder={'Enter Your Email'} icon={'mail'} onChangeText={setEmail}/>
+        <InputBox placeholder={'Enter Your Institution'} icon={'school'} onChangeText={setInstitution}/>
+        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} onChangeText={setPassword} />
+        <InputBox placeholder={'Confirm Your Password'} icon={'lock-closed'} secure={true} onChangeText={setCpass}/>
 
         <Btn text={'Register'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={() => {navigation.navigate('comic')}} />
     </View>

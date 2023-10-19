@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useCallback, useState} from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
 import Constant from 'expo-constants'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+
+//firebase
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 
 //? components
@@ -11,6 +18,31 @@ import Slider from '../components/Slider';
 
 
 export default function Profile() {
+  const db = firebase.firestore();
+
+  const [user, setUser] = useState()
+  const [loading, setLoading] = useState(true)
+
+  useFocusEffect(
+    useCallback(() => {
+    (
+      async () => {
+        const email = await AsyncStorage.getItem('session')
+        const info = await db.collection('users').doc(email).get()
+        setUser(info.data())
+
+        setLoading(false)
+      }
+    )()
+  }, [])
+  )
+
+  const logout = async () => {
+    await AsyncStorage.removeItem('session')
+
+    navigation.navigate('Home')
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -46,7 +78,7 @@ export default function Profile() {
             <Slider />
           </View>
 
-          <TouchableOpacity style={{...styles.touchable, marginTop: 5}}>
+          <TouchableOpacity style={{...styles.touchable, marginTop: 5}} onPress={logout}>
             <Text style={{...styles.touchableText, color: '#ff3333'}}>Logout</Text>
             <Ionicons name="log-out-outline" size={30} color="#ff3333" />
           </TouchableOpacity>
