@@ -46,6 +46,8 @@ function SignUp({navigation}) {
       })
       .catch(e => console.log(e));
 
+      console.log('yup')
+
     const db = firebase.firestore();
     db.collection('users')
       .doc(email)
@@ -53,6 +55,7 @@ function SignUp({navigation}) {
       .then(data => {
         navigation.navigate('Login')
       })
+      .catch(e => console.log(e));
   }
 
   return (
@@ -72,7 +75,7 @@ function SignUp({navigation}) {
         <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} onChangeText={setPassword} />
         <InputBox placeholder={'Confirm Your Password'} icon={'lock-closed'} secure={true} onChangeText={setCpass}/>
 
-        <Btn text={'Register'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={() => {navigation.navigate('comic')}} />
+        <Btn text={'Register'} style={{marginTop: hp('4%'), paddingVertical: 10}} onPress={signup} />
     </View>
   );
 }

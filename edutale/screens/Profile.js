@@ -17,10 +17,10 @@ import InputBox from '../components/InputBox'
 import Slider from '../components/Slider';
 
 
-export default function Profile() {
+export default function Profile({navigation}) {
   const db = firebase.firestore();
 
-  const [user, setUser] = useState()
+  const [user, setUser] = useState({name: '', email: '', institution: ''})
   const [loading, setLoading] = useState(true)
 
   useFocusEffect(
@@ -55,13 +55,13 @@ export default function Profile() {
 
         <View style={{alignSelf: 'center'}}>
           <Text style={styles.label}>Name</Text>
-          <InputBox value={'Vansh Sachdeva'} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
+          <InputBox value={user.name} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
 
           <Text style={styles.label}>Email</Text>
-          <InputBox value={'vanshsachdeva2005@gmail.com'} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
+          <InputBox value={user.email} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
 
           <Text style={styles.label}>Institution</Text>
-          <InputBox value={'Delhi Technological University'} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
+          <InputBox value={user.institution} editable={false} style={{width: wp('87%'), marginTop: 0}}/>
 
           <TouchableOpacity style={styles.touchable}>
             <Text style={styles.touchableText}>Change Password</Text>

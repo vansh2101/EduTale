@@ -8,7 +8,7 @@ import Constant from 'expo-constants'
 import Btn from './Btn';
 
 
-export default function PlayModal({visible, onPress}) {
+export default function PlayModal({visible, onPress, onBtnPress}) {
   return (
     <Modal statusBarTranslucent={true} visible={visible} animationType='slide' transparent={true}>
       <View style={styles.modal}>
@@ -38,7 +38,7 @@ export default function PlayModal({visible, onPress}) {
                 </TouchableOpacity>
             </View>
 
-            <Btn text={'Play'} style={{marginTop: 20, width: wp('60%'), paddingVertical: 5}} />
+            <Btn text={'Play'} style={{marginTop: 20, width: wp('60%'), paddingVertical: 5}} onPress={onBtnPress} />
         </View>
 
       </View>

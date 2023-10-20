@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Pressable, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,7 +22,10 @@ function Login({navigation}) {
     const [password, setPassword] = useState('')
 
     const signin = () => {
-      if(email == '') return
+      if(email == '') {
+        Alert.alert("Email Required", 'Please enter your email')
+        return
+      }
 
       setLoading(true)
       firebase.auth()
@@ -36,10 +39,7 @@ function Login({navigation}) {
           })
       })
       .catch(e => {
-          if (e.code === 'auth/invalid-email') Alert.alert("Email Invalid", 'Please enter a correct email')
-          else if (e.code === 'auth/internal-error') Alert.alert("Password Invalid", 'Please enter a password')
-          else if (e.code === 'auth/wrong-password') Alert.alert("Wrong Password", 'Password Incorrect')
-          else if (e.code === 'auth/user-not-found') Alert.alert("User does not exist", 'User with entered email id does not exist')
+          Alert.alert('Error', 'Invalid Email or Password')
           setEmail('')
           setPassword('')
           setLoading(false)
@@ -57,8 +57,8 @@ function Login({navigation}) {
         <Text style={styles.heading}>Login</Text>
         <Text style={styles.subHeading}>Please Sign In to Continue</Text>
 
-        <InputBox placeholder={'Enter Your Email'} icon={'mail'} onChangeText={val => setEmail(val)}/>
-        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} onChangeText={val => setPassword(val)}/>
+        <InputBox placeholder={'Enter Your Email'} icon={'mail'} onChangeText={val => setEmail(val)} value={email}/>
+        <InputBox placeholder={'Enter Your Password'} icon={'key'} secure={true} onChangeText={val => setPassword(val)} value={password}/>
 
         <Pressable>
           <Text style={styles.link}>Forgot your Password?</Text>

@@ -10,7 +10,7 @@ import Card from '../components/Card';
 import PlayModal from '../components/PlayModal';
 
 
-export default function Library() {
+export default function Library({navigation}) {
 
   const [playModal, setPlayModal] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Library() {
         </View>
       </TouchableNativeFeedback>
 
-      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} />
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} onBtnPress={() => navigation.navigate('comic')} />
 
     </View>
   )
