@@ -46,7 +46,7 @@ export default function Library({navigation}) {
         </View>
       </TouchableNativeFeedback>
 
-      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} onBtnPress={() => navigation.navigate('comic')} />
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} onBtnPress={() => {setPlayModal(false);navigation.navigate('comic')}} />
 
     </View>
   )

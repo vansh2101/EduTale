@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -7,7 +7,7 @@ import Home from '../screens/Home';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Tabs from './Tabs';
-import Comic from '../screens/Comic';
+import ComicStack from './ComicStack';
 
 
 
@@ -20,7 +20,7 @@ function LoginStack({onReady}) {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={SignUp} />
-        <Stack.Screen name="main" component={Tabs} />
+        <Stack.Screen name="main" component={ComicStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

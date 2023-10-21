@@ -10,7 +10,6 @@ import Library from '../screens/Library.js'
 import Explore from '../screens/Explore.js'
 import Scan from '../screens/Scan.js'
 import Profile from '../screens/Profile.js'
-import ComicStack from './ComicStack.js';
 
 
 const Tab = createBottomTabNavigator();
@@ -61,7 +60,7 @@ function Tabs() {
         }
     })}
     >
-      <Tab.Screen name="Library" component={ComicStack} />
+      <Tab.Screen name="Library" component={Library} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Scan" component={Scan} />
       <Tab.Screen name="Profile" component={Profile} />

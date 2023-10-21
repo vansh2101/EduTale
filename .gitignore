@@ -2,3 +2,5 @@ UI
 edutale/.expo
 edutale/node_modules
 comic_generator/node_modules
+comic_generator/public/characterlist.json
+comic_generator/public/speechbubble.json

@@ -27,3 +27,8 @@ Login:-
 colours:-
 1) #3A4FFE - blue
 2) #242424 - black
+
+
+
+1) Book mode
+2) Play mode

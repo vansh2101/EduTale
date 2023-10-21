@@ -1,0 +1,585 @@
+{
+  "aryan": {
+    "patterns": [
+      "emotion/{{emotion}}",
+      "pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "confused",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "handsfolded": "",
+        "handsinpocket": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#EA9A00' i]",
+        "attr": "fill",
+        "default": "#EA9A00"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#f3d4ca' i]",
+        "attr": "fill",
+        "default": "#f3d4ca"
+      }
+    }
+  },
+  "bean": {
+    "patterns": [
+      "{{angle}}/pose/{{pose}}",
+      "{{angle}}/emotion/{{emotion}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdinglaptop": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {}
+  },
+  "biden": {
+    "patterns": [
+      "emotion/{{emotion}}",
+      "pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "confused",
+        "sad": "sad",
+        "happy": "happy",
+        "fear": "worried"
+      },
+      "pose": {
+        "clapping": "",
+        "handonhip": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingicecream": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "makingapoint": "",
+        "makingapointwithconfidence": "",
+        "pointing45degrees": "",
+        "pointingatyou": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "thinking": "",
+        "thumbsup": "",
+        "walkingfast": "",
+        "waving": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "suit": {
+        "type": "color",
+        "selector": "path[fill='#343d4c' i]",
+        "attr": "fill",
+        "default": "#343d4c"
+      },
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#dddddd' i]",
+        "attr": "fill",
+        "default": "#dddddd"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#f99a6b' i]",
+        "attr": "fill",
+        "default": "#f99a6b"
+      },
+      "tie": {
+        "type": "color",
+        "selector": "path[fill='#004fa6' i]",
+        "attr": "fill",
+        "default": "#004fa6"
+      },
+      "hair": {
+        "type": "color",
+        "selector": "path[fill='#fdf7dd' i]",
+        "attr": "fill",
+        "default": "#fdf7dd"
+      }
+    }
+  },
+  "dee": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "handsfolded": "",
+        "handsheldback": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointing45degree": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {}
+  },
+  "deenuova": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "handsfolded": "",
+        "handsheldback": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointing45degree": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#BCD1EC' i]",
+        "attr": "fill",
+        "default": "#BCD1EC"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#F9E6C8' i]",
+        "attr": "fill",
+        "default": "#F9E6C8"
+      }
+    }
+  },
+  "dey": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {}
+  },
+  "deynuovo": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#BDC59A' i]",
+        "attr": "fill",
+        "default": "#BDC59A"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#EEDDC5' i]",
+        "attr": "fill",
+        "default": "#EEDDC5"
+      }
+    }
+  },
+  "evan": {
+    "patterns": [
+      "emotion/{{emotion}}",
+      "pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsheldback": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdinglaptop": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#FC6' i]",
+        "attr": "fill",
+        "default": "#FFCC66"
+      }
+    }
+  },
+  "priya": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsheldback": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingleft": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": ""
+      }
+    },
+    "lookups": {}
+  },
+  "priyanuova": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsheldback": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingleft": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#F796B3' i]",
+        "attr": "fill",
+        "default": "#F796B3"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#EFDFD3' i]",
+        "attr": "fill",
+        "default": "#EFDFD3"
+      },
+      "pant": {
+        "type": "color",
+        "selector": "path[fill='#3A4E5C' i]",
+        "attr": "fill",
+        "default": "#3A4E5C"
+      }
+    }
+  },
+  "ringo": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "run": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {}
+  },
+  "ringonuovo": {
+    "patterns": [
+      "{{angle}}/emotion/{{emotion}}",
+      "{{angle}}/pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "curious",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "angry": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingbook": "",
+        "holdingcoffee": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "run": "",
+        "shrug": "",
+        "super": "",
+        "thinking": "",
+        "thumbsup": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#8b9fdc' i]",
+        "attr": "fill",
+        "default": "#8b9fdc"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#BDA48E' i]",
+        "attr": "fill",
+        "default": "#BDA48E"
+      }
+    }
+  },
+  "trump": {
+    "patterns": [
+      "emotion/{{emotion}}",
+      "pose/{{pose}}"
+    ],
+    "files": {
+      "emotion": {
+        "angry": "angry",
+        "surprise": "shocked",
+        "sad": "sad",
+        "happy": "smile",
+        "fear": "worried"
+      },
+      "pose": {
+        "clapping": "",
+        "handonhip": "",
+        "handsfolded": "",
+        "handsinpocket": "",
+        "handsonhip": "",
+        "holdingicecream": "",
+        "holdinglaptop": "",
+        "holdingmobile": "",
+        "makingapoint": "",
+        "makingapointwithconfidence": "",
+        "pointing45degrees": "",
+        "pointingatyou": "",
+        "pointingright": "",
+        "pointingup": "",
+        "readingpaper": "",
+        "shrug": "",
+        "thumbsup": "",
+        "walkingfast": "",
+        "waving": "",
+        "yuhoo": ""
+      }
+    },
+    "lookups": {},
+    "replace": {
+      "suit": {
+        "type": "color",
+        "selector": "path[fill='#454545' i]",
+        "attr": "fill",
+        "default": "#454545"
+      },
+      "shirt": {
+        "type": "color",
+        "selector": "path[fill='#fff' i]",
+        "attr": "fill",
+        "default": "#fff"
+      },
+      "face": {
+        "type": "color",
+        "selector": "path[fill='#ff9b58' i]",
+        "attr": "fill",
+        "default": "#ff9b58"
+      },
+      "hair": {
+        "type": "color",
+        "selector": "path[fill='#ffb203' i]",
+        "attr": "fill",
+        "default": "#ffb203"
+      },
+      "tie": {
+        "type": "color",
+        "selector": "path[fill='#f4380c' i]",
+        "attr": "fill",
+        "default": "#f4380c"
+      }
+    }
+  }
+}
