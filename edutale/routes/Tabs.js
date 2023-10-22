@@ -56,13 +56,13 @@ function Tabs() {
             backgroundColor: '#242424',
             borderRadius: 15,
             height: 62,
-            elevation: 10
-        }
+            elevation: 10,
+        },
     })}
     >
       <Tab.Screen name="Library" component={Library} />
       <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Scan" component={Scan} />
+      <Tab.Screen name="Scan" component={Scan} options={{tabBarStyle: {display: 'none'}}} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

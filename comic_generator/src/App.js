@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import data from './characterlist.json';
+import html2canvas from 'html2canvas';
+import {toPng} from 'html-to-image'
 
 // components
 import Block from './components/Block';
@@ -63,7 +65,7 @@ function App() {
 
               if(!chars.includes(character)){
                 chars.push(character)
-                const random = Math.floor(Math.random() * all_characters.length)
+                let random = Math.floor(Math.random() * all_characters.length)
                 if(Object.values(chosen_characters).includes(all_characters[random])){random = Math.floor(Math.random() * all_characters.length)}
                 chosen_characters[character] = all_characters[random]
               }
@@ -72,7 +74,7 @@ function App() {
               const comic_character = chosen_characters[character]
 
               const poses = Object.keys(data[comic_character]["files"]["pose"])
-              const random = Math.floor(Math.random() * poses.length)
+              let random = Math.floor(Math.random() * poses.length)
               const pose = poses[random]
               
               arr.push({ speaker: character, text: parts[1].trim(), emotion: emotion, character: comic_character, pose: pose });
@@ -137,14 +139,34 @@ function App() {
     useEffect(() => {
         generateConversationArray()
       }, [])
+
+
+    const saveComic = () => {
+      console.log('start')
+
+      for (let i=0; i < conversation.length; i++){
+        const element = document.getElementById(`${i}`)
+        const disp = element.style.display
+        element.style.display = 'block'
+
+        toPng(element).then(dataUrl => {
+          element.style.display = disp
+          console.log(dataUrl)
+        })
+
+    }
+
+    }
       
 
       
     return(
         <main>
            {conversation.map((item, index) => (
-             <Block key={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion}/>
+             <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 !== 0 ? true: false}/>
            ))}
+
+           <button onClick={() => saveComic()}>Save Comic</button>
 
        </main>
     )

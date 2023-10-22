@@ -301,45 +301,6 @@
       }
     }
   },
-  "evan": {
-    "patterns": [
-      "emotion/{{emotion}}",
-      "pose/{{pose}}"
-    ],
-    "files": {
-      "emotion": {
-        "angry": "angry",
-        "surprise": "curious",
-        "sad": "sad",
-        "happy": "smile",
-        "fear": "worried"
-      },
-      "pose": {
-        "angry": "",
-        "handsfolded": "",
-        "handsheldback": "",
-        "handsonhip": "",
-        "holdingbook": "",
-        "holdinglaptop": "",
-        "pointingright": "",
-        "pointingup": "",
-        "readingpaper": "",
-        "super": "",
-        "thinking": "",
-        "thumbsup": "",
-        "yuhoo": ""
-      }
-    },
-    "lookups": {},
-    "replace": {
-      "shirt": {
-        "type": "color",
-        "selector": "path[fill='#FC6' i]",
-        "attr": "fill",
-        "default": "#FFCC66"
-      }
-    }
-  },
   "priya": {
     "patterns": [
       "{{angle}}/emotion/{{emotion}}",

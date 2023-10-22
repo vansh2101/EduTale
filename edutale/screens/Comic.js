@@ -13,7 +13,7 @@ export default function Comic({navigation}) {
 
       <WebView
         style={styles.webView}
-        source={{ uri: 'https://cc85-202-173-127-82.ngrok-free.app' }}
+        source={{ uri: 'https://bf4c-2405-201-4004-a0cc-aa79-4c1c-c6c7-38c6.ngrok-free.app' }}
         />
       </View>
   )
