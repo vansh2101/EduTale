@@ -8,3 +8,14 @@ main{
   justify-content: center;
   /* overflow: hidden; */
 }
+
+
+button{
+  background-color: transparent;
+  outline: none;
+  padding: 10px;
+  border: none;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+}

@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import data from './characterlist.json';
-import html2canvas from 'html2canvas';
 import {toPng} from 'html-to-image'
+import {BsBookmarkFill} from 'react-icons/bs'
+
+//firebase
+import firebase from 'firebase/compat/app'
+import {firebaseConfig} from './static/firebaseConfig'
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage'
 
 // components
 import Block from './components/Block';
 
 function App() {
+  firebase.initializeApp(firebaseConfig)
+
+  const params = window.location.search.replace('?', '').split('&')
+
+
     const [paragraph, setParagraph] = useState(`
         Bob: Hey, what are you looking at? 
 
@@ -48,6 +60,7 @@ function App() {
 
     const [conversation, setConversation] = useState([])
     const [number, setNumber] = useState(-1)
+    const [loading, setLoading] = useState(true)
     
     
     const generateConversationArray = async () => {
@@ -85,6 +98,8 @@ function App() {
 
         console.log(chosen_characters)
         setConversation(arr);
+
+        setLoading(false)
 
         animateComic(-1, arr.length)
 
@@ -152,10 +167,49 @@ function App() {
         toPng(element).then(dataUrl => {
           element.style.display = disp
           console.log(dataUrl)
+
+          upload(dataUrl, `${i}.png`).then(() => {
+            console.log('done')
+          })
         })
+
+      }
+
+      const db = firebase.firestore()
+
+      db.collection('users').doc('vanshsachdeva2005@gmail.com').collection('comics').doc().set({
+        user: 'user',
+        name: 'sample',
+        subject: 'sample',
+        slides: conversation.length,
+        path: 'sample',
+      }).then(() => {
+        console.log('done')
+      })
+
+      setLoading(false)
 
     }
 
+    const upload = async (uri, name) => {
+      if (uri !== undefined){
+        const response = await fetch(uri)
+        const blob = await response.blob()
+
+        const path = `sample/${name}`
+
+        var ref = firebase.storage().ref().child(path)
+        return ref.put(blob)
+      }
+    }
+
+    if(loading){
+      return(
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+          <img src={'./loader.gif'} style={{width: '60%', marginLeft: '20%'}}/>
+          <span style={{fontSize: '2vh', opacity: 0.7}}>Generating Comic</span>
+        </div>
+      )
     }
       
 
@@ -166,7 +220,9 @@ function App() {
              <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 !== 0 ? true: false}/>
            ))}
 
-           <button onClick={() => saveComic()}>Save Comic</button>
+           <button onClick={() => {setLoading(true);saveComic()}}>
+              <BsBookmarkFill size={40} color='#fff' />
+            </button>
 
        </main>
     )

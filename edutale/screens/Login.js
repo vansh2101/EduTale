@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Pressable, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Pressable, Alert, Image } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,25 +20,6 @@ function Login({navigation}) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    useLayoutEffect(() => {
-      // const checkUser = async () => {
-      //   const user = await AsyncStorage.getItem('session')
-      //   console.log(user)
-
-      //   if(user) {
-      //     navigation.navigate('main')
-      //   }
-      // }
-
-      // checkUser()
-
-      // AsyncStorage.getItem('session').then(data => {
-      //   if(data) {
-      //     navigation.navigate('main')
-      //   }
-      // })
-    }, [])
 
 
     const signin = () => {
@@ -71,6 +52,15 @@ function Login({navigation}) {
       navigation.navigate('main')
     }
   })
+
+  if(loading){
+    return(
+      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Image source={require('../assets/loader.gif')} style={{width: wp('60%'), marginLeft: wp('20%')}}/>
+        <Text style={{fontFamily: 'comic_med', fontSize: hp('2%'), opacity: 0.7}}>Checking Credentials</Text>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>

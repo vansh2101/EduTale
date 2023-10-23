@@ -43,6 +43,15 @@ export default function Profile({navigation}) {
     navigation.navigate('Home')
   }
 
+  if(loading){
+    return(
+      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Image source={require('../assets/loader.gif')} style={{width: wp('60%'), marginLeft: wp('20%')}}/>
+        <Text style={{fontFamily: 'comic_med', fontSize: hp('2%'), opacity: 0.7}}>Fetching Details</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>

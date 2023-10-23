@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
@@ -21,6 +21,8 @@ function SignUp({navigation}) {
   const [institution, setInstitution] = useState()
   const [password, setPassword] = useState()
   const [cpass, setCpass] = useState()
+  const [loading, setLoading] = useState(false)
+
 
   const signup = () => {
     if(password !== cpass){
@@ -39,6 +41,8 @@ function SignUp({navigation}) {
       institution: institution,
     }
 
+    setLoading(true)
+
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((data) => {
@@ -53,9 +57,19 @@ function SignUp({navigation}) {
       .doc(email)
       .set(data)
       .then(data => {
+        setLoading(false)
         navigation.navigate('Login')
       })
       .catch(e => console.log(e));
+  }
+
+  if(loading){
+    return(
+      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Image source={require('../assets/loader.gif')} style={{width: wp('60%'), marginLeft: wp('20%')}}/>
+        <Text style={{fontFamily: 'comic_med', fontSize: hp('2%'), opacity: 0.7}}>Creating Your Account</Text>
+      </View>
+    )
   }
 
   return (

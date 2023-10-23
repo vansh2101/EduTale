@@ -32,3 +32,8 @@ colours:-
 
 1) Book mode
 2) Play mode
+
+
+2) save ke liye button
+3) story generator
+4) databse link
