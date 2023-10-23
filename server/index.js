@@ -1,6 +1,6 @@
 const express = require('express');
 const OpenAIApi = require('openai');
-
+const Tesseract= require('tesseract.js');
 const app = express();
 
 app.use(express.json());
@@ -33,6 +33,23 @@ app.post('/generate', async (req, res) => {
     res.status(500).json({ error: 'Failed to generate text.' });
   }
 });
+
+app.post('/ocr', async (req, res) => {
+  const { imageUrl } = req.body;
+  try {
+    Tesseract.recognize(
+        imageUrl,
+        'eng',
+//    { logger: m => console.log(m) }
+    ).then(({ data: { text } }) => {
+    res.json({ text });
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to perform OCR.' });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 
