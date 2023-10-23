@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Pressable, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -20,6 +20,26 @@ function Login({navigation}) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useLayoutEffect(() => {
+      // const checkUser = async () => {
+      //   const user = await AsyncStorage.getItem('session')
+      //   console.log(user)
+
+      //   if(user) {
+      //     navigation.navigate('main')
+      //   }
+      // }
+
+      // checkUser()
+
+      // AsyncStorage.getItem('session').then(data => {
+      //   if(data) {
+      //     navigation.navigate('main')
+      //   }
+      // })
+    }, [])
+
 
     const signin = () => {
       if(email == '') {
@@ -45,6 +65,12 @@ function Login({navigation}) {
           setLoading(false)
       })
   }
+
+  AsyncStorage.getItem('session').then(data => {
+    if(data) {
+      navigation.navigate('main')
+    }
+  })
 
   return (
     <View style={styles.container}>

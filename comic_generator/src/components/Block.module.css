@@ -2,18 +2,17 @@
 
 .container{
     width: 100vw;
-    /* background-color: #f3f3f3; */
+    aspect-ratio: 1/1.01;
     background-image: url("../../public/bg.jpg");
     background-repeat: no-repeat;
     background-size: 100vw 100%;
+    position: relative;
 }
 
 
 .block{
-    width: 100vw;
-    height: 42.5vh;
-    box-sizing: border-box;
-    border: none;
+    width: 60%;
+    margin-top: 10%;
 }
 
 .text{
@@ -23,6 +22,9 @@
     font-family: 'Comic Neue', cursive;
     border-top: 1px solid black;
     background-color: #f3f3f3;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .speaker{
