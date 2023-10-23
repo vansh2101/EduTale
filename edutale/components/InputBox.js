@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function InputBox({placeholder, onChangeText, secure=false, keyboard='default', style, value, icon, editable=true}) {
+export default function InputBox({placeholder, onChangeText, secure=false, keyboard='default', style, value, icon, editable=true, multiline=false}) {
   return (
     <View style={{...styles.container, ...style}}>
       {icon ? <Ionicons name={icon} size={24} color="#242424" /> : <></> }
-      <TextInput placeholder={placeholder} style={styles.input} secureTextEntry={secure} keyboardType={keyboard} onChangeText={onChangeText} value={value} editable={editable}/>
+      <TextInput placeholder={placeholder} style={styles.input} secureTextEntry={secure} keyboardType={keyboard} onChangeText={onChangeText} value={value} editable={editable} multiline={multiline}/>
     </View>
   )
 }
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 10,
         alignItems: 'center',
+        maxHeight: hp('25%'),
     },
 
     input: {

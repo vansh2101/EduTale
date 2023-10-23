@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './App.css'
 import data from './characterlist.json';
 import {toPng} from 'html-to-image'
@@ -17,50 +17,52 @@ import Block from './components/Block';
 function App() {
   firebase.initializeApp(firebaseConfig)
 
-  const params = window.location.search.replace('?', '').split('&')
+  const [_, user, desc, name, subject] = window.location.pathname.split('/')
 
 
-    const [paragraph, setParagraph] = useState(`
-        Bob: Hey, what are you looking at? 
+    // const [paragraph, setParagraph] = useState(`
+    //     Bob: Hey, what are you looking at? 
 
-        Alice: This diagram here has been drawing my attention for a while now. I was trying to figure out what it might be illustrating, and then it hit me.
+    //     Alice: This diagram here has been drawing my attention for a while now. I was trying to figure out what it might be illustrating, and then it hit me.
 
-        Bob: Ok so what is it?
+    //     Bob: Ok so what is it?
 
-        Alice: It's an illustration of the photoelectric effect.
+    //     Alice: It's an illustration of the photoelectric effect.
 
-        Bob: Photoelectric effect? Never heard of it. Care to explain?
+    //     Bob: Photoelectric effect? Never heard of it. Care to explain?
 
-        Alice: Sure! It's a phenomenon in which electrons are ejected from the surface of a metal when light is incident on it. These electrons ejected from the metal are called photoelectrons.
+    //     Alice: Sure! It's a phenomenon in which electrons are ejected from the surface of a metal when light is incident on it. These electrons ejected from the metal are called photoelectrons.
 
-        Bob: Interesting! How does it work?
+    //     Bob: Interesting! How does it work?
 
-        Alice: Good question! Whenever light strikes the metal, it excites the atomic electrons, causing them to break free from the atom and become the photoelectric electrons that are released. Depending on the intensity of the incident light, the energy of the photoelectron released can be very high.
+    //     Alice: Good question! Whenever light strikes the metal, it excites the atomic electrons, causing them to break free from the atom and become the photoelectric electrons that are released. Depending on the intensity of the incident light, the energy of the photoelectron released can be very high.
 
-        Bob: So, you're saying the light not only excites the electrons, it also gives them energy?
+    //     Bob: So, you're saying the light not only excites the electrons, it also gives them energy?
 
-        Alice: Exactly! It turns out that the higher the frequency of the incident light, the higher the energy of the photoelectrons emitted.
+    //     Alice: Exactly! It turns out that the higher the frequency of the incident light, the higher the energy of the photoelectrons emitted.
 
-        Bob: Hmm, I'm still a bit confused as to what makes this effect different from other phenomena like reflection and refraction.
+    //     Bob: Hmm, I'm still a bit confused as to what makes this effect different from other phenomena like reflection and refraction.
 
-        Alice: Well, the key difference between the photoelectric effect and reflection or refraction lies in the fact that in order for the photoelectric effect to occur, light must be intense enough to break the bond between an electron and an atom. That kind of interaction isn't present with reflection or refraction.
+    //     Alice: Well, the key difference between the photoelectric effect and reflection or refraction lies in the fact that in order for the photoelectric effect to occur, light must be intense enough to break the bond between an electron and an atom. That kind of interaction isn't present with reflection or refraction.
 
-        Bob: Now that I understand the basis of the photoelectric effect, what is its practical application?
+    //     Bob: Now that I understand the basis of the photoelectric effect, what is its practical application?
 
-        Alice: The photoelectric effect has a wide variety of applications. For example, it is used in some security systems, where light sensors detect the presence of individuals in a specific area. It is also used in solar power generation, since solar cells use the photoelectric effect to convert light into electricity. The effect can also be used to measure the intensity of light, since when the electrons are emitted, the number of electrons is proportional to the intensity of light. Finally, it is used in photo-therapy, a treatment for certain kinds of skin disorders.
+    //     Alice: The photoelectric effect has a wide variety of applications. For example, it is used in some security systems, where light sensors detect the presence of individuals in a specific area. It is also used in solar power generation, since solar cells use the photoelectric effect to convert light into electricity. The effect can also be used to measure the intensity of light, since when the electrons are emitted, the number of electrons is proportional to the intensity of light. Finally, it is used in photo-therapy, a treatment for certain kinds of skin disorders.
 
-        Bob: Wow, all these applications! I must admit I'm really impressed.
+    //     Bob: Wow, all these applications! I must admit I'm really impressed.
 
-        Alice: I'm glad I could help! I find the photoelectric effect fascinating, don't you?
+    //     Alice: I'm glad I could help! I find the photoelectric effect fascinating, don't you?
 
-        Bob: Definitely! Thanks for providing such comprehensive information.
+    //     Bob: Definitely! Thanks for providing such comprehensive information.
 
-        Alice: Anytime!
-    `)
+    //     Alice: Anytime!
+    // `)
+
+    const [paragraph, setParagraph] = useState('')
+    const [generated, setGenerated] = useState(false)
 
     const [conversation, setConversation] = useState([])
     const [number, setNumber] = useState(-1)
-    const [loading, setLoading] = useState(true)
     
     
     const generateConversationArray = async () => {
@@ -98,8 +100,6 @@ function App() {
 
         console.log(chosen_characters)
         setConversation(arr);
-
-        setLoading(false)
 
         animateComic(-1, arr.length)
 
@@ -150,10 +150,39 @@ function App() {
         .catch(error => console.log('error', error));
     }
 
+    useEffect(() => {
+      generateConversationArray()
+    }, [paragraph])
+
 
     useEffect(() => {
-        generateConversationArray()
-      }, [])
+      if (!generated) {
+        window.alert('yes')
+        try{
+          var context = desc.slice(0,151)
+        }
+        catch(e){
+          var context = desc
+        }
+
+        window.alert(context)
+        fetch('http://192.168.29.134:8000/generate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({prompt: `'${context}'Create conversation in 1000 words`})
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          setParagraph(data.generatedText)
+          setGenerated(true)
+        })
+        .catch(e => {
+          window.alert(e)
+          console.log(e)
+        })
+      }
+    }, [generated])
 
 
     const saveComic = () => {
@@ -177,50 +206,39 @@ function App() {
 
       const db = firebase.firestore()
 
-      db.collection('users').doc('vanshsachdeva2005@gmail.com').collection('comics').doc().set({
-        user: 'user',
-        name: 'sample',
-        subject: 'sample',
+      db.collection('users').doc(user).collection('comics').doc().set({
+        name: name,
+        subject: subject,
         slides: conversation.length,
-        path: 'sample',
+        path: `${user}/${subject}/${name}`,
       }).then(() => {
         console.log('done')
+        window.alert('Comic Saved Successfully')
       })
 
-      setLoading(false)
 
     }
 
-    const upload = async (uri, name) => {
+    const upload = async (uri, img) => {
       if (uri !== undefined){
         const response = await fetch(uri)
         const blob = await response.blob()
 
-        const path = `sample/${name}`
+        const path = `${user}/${subject}/${name}/${img}`
 
         var ref = firebase.storage().ref().child(path)
         return ref.put(blob)
       }
     }
-
-    if(loading){
-      return(
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', flex: 1, alignItems: 'center'}}>
-          <img src={'./loader.gif'} style={{width: '60%', marginLeft: '20%'}}/>
-          <span style={{fontSize: '2vh', opacity: 0.7}}>Generating Comic</span>
-        </div>
-      )
-    }
       
-
       
     return(
         <main>
            {conversation.map((item, index) => (
-             <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 !== 0 ? true: false}/>
+             <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 == 0 ? true: false}/>
            ))}
 
-           <button onClick={() => {setLoading(true);saveComic()}}>
+           <button onClick={() => {saveComic()}}>
               <BsBookmarkFill size={40} color='#fff' />
             </button>
 

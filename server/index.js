@@ -2,9 +2,11 @@ const express = require('express');
 const OpenAIApi = require('openai');
 const Tesseract= require('tesseract.js');
 const app = express();
+const cors = require('cors')
 
 app.use(express.json());
 app.use(express.raw({ limit: '20mb' }));
+app.use(cors({origin: '*'}))
 
 // Define your OpenAI API key
 const OPENAI_API_KEY = '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';
@@ -16,6 +18,7 @@ const openai = new OpenAIApi({
 
 app.post('/generate', async (req, res) => {
   const { prompt } = req.body;
+  console.log(prompt)
 
   try {
     const response = await openai.completions.create({
@@ -36,6 +39,7 @@ app.post('/generate', async (req, res) => {
 
 app.post('/ocr', async (req, res) => {
   const { imageUrl } = req.body;
+  
   try {
     Tesseract.recognize(
         imageUrl,
@@ -51,7 +55,7 @@ app.post('/ocr', async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
