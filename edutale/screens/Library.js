@@ -1,8 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, TouchableNativeFeedback } from 'react-native'
 import Constant from 'expo-constants'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//firebase
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage'
 
 //? components
 import InputBox from '../components/InputBox';
@@ -13,6 +20,57 @@ import PlayModal from '../components/PlayModal';
 export default function Library({navigation}) {
 
   const [playModal, setPlayModal] = useState(false);
+  const [comics, setComics] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [current, setCurrent] = useState({})
+  const [path, setPath] = useState('')
+  const db = firebase.firestore()
+
+  useEffect(() => {
+    AsyncStorage.getItem('session').then(user => {
+      if(!user) {
+        navigation.navigate('Home')
+      }
+      else{
+        db.collection('users').doc(user).collection('comics').get().then(data => {
+          const arr = []
+          data.forEach(doc => {
+            arr.push(doc.data())
+          })
+    
+          setComics(arr)
+          setLoading(false)
+        })
+      }
+    
+    })
+    
+  }, [])
+
+  const openModal = (curr) => {
+    setCurrent(curr)
+
+    firebase.storage().ref().child(`${curr.path}/0.png`).getDownloadURL().then(uri => {
+      setPath(uri)
+    })
+
+    setPlayModal(true)
+  }
+
+  const playComic = () => {
+    setPlayModal(false)
+    navigation.navigate('play', {data: current})
+  }
+
+
+  if(loading){
+    return(
+      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Image source={require('../assets/loader.gif')} style={{width: wp('60%'), marginLeft: wp('20%')}}/>
+        <Text style={{fontFamily: 'comic_med', fontSize: hp('2%'), opacity: 0.7}}>Fetching Data</Text>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -30,23 +88,21 @@ export default function Library({navigation}) {
       <InputBox icon={'search'} placeholder={'Search your Library'} style={{alignSelf: 'center', width: wp('90%')}} />
 
       <View style={styles.main}>
-        <Card onPress={() => setPlayModal(true)}/>
-        <Card onPress={() => setPlayModal(true)}/>
-        <Card onPress={() => setPlayModal(true)}/>
-        <Card onPress={() => setPlayModal(true)}/>
-        <Card onPress={() => setPlayModal(true)}/>
-        <Card onPress={() => setPlayModal(true)}/>
+        {comics.map((item, index) => (
+          <Card key={index} name={item.name} subject={item.subject} slides={item.slides} img={item.path} onPress={() => openModal(item)}/>
+        ))}
+
       </View>
 
       </ScrollView>
 
-      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#ccc', false, 30)}>
+      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#ccc', false, 30)} onPress={() => {navigation.navigate('create', {data: ''})}}>
         <View style={styles.addBtn}>
           <Ionicons name="add" size={35} color="#ccc" />
         </View>
       </TouchableNativeFeedback>
 
-      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} onBtnPress={() => {setPlayModal(false);navigation.navigate('comic')}} />
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} onBtnPress={playComic} data={current} img={path} />
 
     </View>
   )
@@ -55,6 +111,7 @@ export default function Library({navigation}) {
 const styles = StyleSheet.create({
   container: {
     marginTop: Constant.statusBarHeight + 5,
+    height: hp('90%') - Constant.statusBarHeight,
   },
 
   pfp: {

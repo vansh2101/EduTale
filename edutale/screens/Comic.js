@@ -33,7 +33,7 @@ export default function Comic({route, navigation}) {
       <WebView
         style={styles.webView}
         source={{ 
-          uri: `https://482c-2405-201-4004-a0cc-f08f-b481-1198-6d02.ngrok-free.app/${user}/${description}/${name}/${subject}`
+          uri: `http://10.0.2.2:3000/${user}/${description}/${name}/${subject}`
         }}
         />
       </View>

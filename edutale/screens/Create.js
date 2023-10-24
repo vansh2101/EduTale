@@ -34,7 +34,7 @@ export default function Create({route, navigation}) {
           <Ionicons name="chevron-back-sharp" size={40} color="#242424" />
         </TouchableOpacity>
 
-        <Text style={styles.heading}>Create Your Comic</Text>
+        <Text style={styles.heading}>Create Your EduTale</Text>
 
         <View>
             <Text style={styles.label}>Name:</Text>

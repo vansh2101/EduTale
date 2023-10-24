@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Comic from '../screens/Comic';
 import Create from '../screens/Create';
 import Tabs from './Tabs';
+import Play from '../screens/Play';
 
 
 
@@ -17,6 +18,7 @@ function ComicStack({onReady}) {
         <Stack.Screen name="library" component={Tabs} />
         <Stack.Screen name="create" component={Create} />
         <Stack.Screen name="comic" component={Comic} />
+        <Stack.Screen name="play" component={Play} />
       </Stack.Navigator>
   );
 }

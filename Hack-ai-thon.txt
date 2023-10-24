@@ -30,10 +30,6 @@ colours:-
 
 
 
-1) Book mode
-2) Play mode
-
-
-2) save ke liye button
-3) story generator
-4) databse link
+1) loading in play comic
+2) Find new backgrounds
+3) fix bug on explore page

@@ -3,7 +3,12 @@ import styles from './Block.module.css'
 import data from '../characterlist.json'
 
 function Block({speaker, txt, style, character, emotion, pose, id, mirror}) {
-  const character_face = data[character]["files"]["emotion"][emotion.toLowerCase()]
+  try{
+    var character_face = data[character]["files"]["emotion"][emotion.toLowerCase()]
+  }
+  catch{
+    var character_face = data[character]["files"]["emotion"]['happy']
+  }
 
   return (
     <div className={styles.container} style={style} id={id}>

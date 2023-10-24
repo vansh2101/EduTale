@@ -4,28 +4,34 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Ionicons } from '@expo/vector-icons';
 import Constant from 'expo-constants'
 
+//firebase
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage'
+
 //? components
 import Btn from './Btn';
 
 
-export default function PlayModal({visible, onPress, onBtnPress}) {
+export default function PlayModal({visible, onPress, onBtnPress, data, img}) {
   return (
     <Modal statusBarTranslucent={true} visible={visible} animationType='slide' transparent={true}>
       <View style={styles.modal}>
         <Pressable onPress={onPress} style={styles.invisible}/>
 
         <View style={styles.container}>
-            <Image source={require('../assets/images/cover.jpeg')} style={styles.img} />
+            <Image source={{uri: img}} style={styles.img} />
 
-            <Text style={styles.heading}>Electrostatics</Text>
+            <Text style={styles.heading}>{data.name}</Text>
 
 
             <View style={styles.flex}>
                 <Ionicons name="book" size={19} color="#242424" style={{opacity: 0.7}}/>
-                <Text style={styles.subtext}>Physics</Text>
+                <Text style={styles.subtext}>{data.subject}</Text>
 
                 <Ionicons name="time" size={19} color="#242424" style={{opacity: 0.7, marginLeft: 5}}/>
-                <Text style={styles.subtext}>10 slides</Text>
+                <Text style={styles.subtext}>{data.slides} slides</Text>
             </View>
 
             <View style={{...styles.flex, marginVertical: 15}}>

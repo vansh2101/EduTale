@@ -1,25 +1,39 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
 
+//firebase
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage'
 
-export default function Card({onPress}) {
+
+export default function Card({name, subject, slides, onPress, img}) {
+  const[path, setPath] = useState()
+
+  useEffect(() => {
+      firebase.storage().ref().child(`${img}/0.png`).getDownloadURL().then(uri => {
+        setPath(uri)
+      })
+  }, [])
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={require('../assets/images/cover.jpeg')} style={styles.img} />
+      <Image source={{uri: path}} style={styles.img} />
 
       <View style={{marginLeft: 7}}>
-        <Text style={styles.heading}>Electrostatics</Text>
+        <Text style={styles.heading}>{name}</Text>
 
         <View style={styles.flex}>
             <Ionicons name="book" size={19} color="#242424" style={{opacity: 0.7}}/>
-            <Text style={styles.subtext}>Physics</Text>
+            <Text style={styles.subtext}>{subject}</Text>
         </View>
 
         <View style={styles.flex}>
             <Ionicons name="time" size={19} color="#242424" style={{opacity: 0.7}}/>
-            <Text style={styles.subtext}>10 slides</Text>
+            <Text style={styles.subtext}>{slides} slides</Text>
         </View>
       </View>
     </TouchableOpacity>
