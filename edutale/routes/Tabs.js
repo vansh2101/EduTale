@@ -36,7 +36,7 @@ function Tabs() {
 
             return(
               focused ?
-                <View style={{backgroundColor: '#fff', borderRadius: 10, width: 45, height: 45, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{backgroundColor: '#fff', borderRadius: 10, height: hp('5.5%'), aspectRatio: 1, alignItems: 'center', justifyContent: 'center'}}>
                   <Ionicons name={iconName} size={26} color={color} />
                 </View>
                 :
@@ -55,7 +55,7 @@ function Tabs() {
             marginBottom: hp('2.2%'),
             backgroundColor: '#242424',
             borderRadius: 15,
-            height: 62,
+            height: hp('7.3%'),
             elevation: 10,
         },
     })}

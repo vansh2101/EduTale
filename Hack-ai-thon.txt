@@ -30,6 +30,5 @@ colours:-
 
 
 
-1) loading in play comic
 2) Find new backgrounds
 3) fix bug on explore page

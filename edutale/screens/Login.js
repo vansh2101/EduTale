@@ -47,12 +47,6 @@ function Login({navigation}) {
       })
   }
 
-  AsyncStorage.getItem('session').then(data => {
-    if(data) {
-      navigation.navigate('main')
-    }
-  })
-
   if(loading){
     return(
       <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>

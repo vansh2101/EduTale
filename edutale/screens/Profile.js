@@ -59,7 +59,7 @@ export default function Profile({navigation}) {
         <View style={{overflow: 'hidden'}}>
           <View style={styles.circle}/>
 
-          <Image source={require('../assets/images/pfp.jpeg')} style={styles.pfp} />
+          <Image source={require('../assets/images/pfp.png')} style={styles.pfp} />
         </View>
 
         <View style={{alignSelf: 'center'}}>

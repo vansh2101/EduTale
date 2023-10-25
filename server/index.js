@@ -18,7 +18,6 @@ const openai = new OpenAIApi({
 
 app.post('/generate', async (req, res) => {
   const { prompt } = req.body;
-  console.log(prompt)
 
   try {
     const response = await openai.completions.create({

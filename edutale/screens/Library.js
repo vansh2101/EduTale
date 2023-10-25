@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react'
-import { StyleSheet, Text, View, Image, ScrollView, TouchableNativeFeedback } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableNativeFeedback, StatusBar } from 'react-native'
 import Constant from 'expo-constants'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
@@ -74,10 +74,12 @@ export default function Library({navigation}) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+        <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
+
+      <ScrollView style={{flex: 1}}>
       
       <View style={styles.topBar}>
-        <Image source={require('../assets/images/pfp.jpeg')} style={styles.pfp} />
+        <Image source={require('../assets/images/pfp.png')} style={styles.pfp} />
 
         <View style={{marginTop: 7}}>
           <Text style={{...styles.subText, marginBottom: -10}}>Welcome Back</Text>
@@ -110,8 +112,8 @@ export default function Library({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Constant.statusBarHeight + 5,
-    height: hp('90%') - Constant.statusBarHeight,
+    marginTop: Constant.statusBarHeight,
+    height: hp('90%'),
   },
 
   pfp: {
@@ -142,17 +144,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginVertical: 15,
-    justifyContent: 'space-evenly',
-    rowGap: 13
+    justifyContent: 'space-between',
+    rowGap: 13,
+    width: wp('92%'),
+    alignSelf: 'center'
   },
 
   addBtn: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 30,
     right: 20,
     backgroundColor: '#242424',
-    padding: 10,
     borderRadius: 500,
-    zIndex: 100
+    zIndex: 100,
+    height: hp('7%'),
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

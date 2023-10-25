@@ -24,6 +24,9 @@ function App() {
 
     const [conversation, setConversation] = useState([])
     const [number, setNumber] = useState(-1)
+    const [bg, setBg] = useState()
+
+    const images = ['bg.jpg', 'bg.png', 'bg1.png', 'bg2.png']
     
     
     const generateConversationArray = async () => {
@@ -126,7 +129,7 @@ function App() {
           var context = desc
         }
 
-        fetch('http://20.244.29.91:8000/generate', {
+        fetch('http://localhost:8000/generate', {
             method: 'POST',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'},
@@ -135,6 +138,9 @@ function App() {
         .then(res => res.json())
         .then(data => {
           setParagraph(data.generatedText)
+
+          let random_bg = Math.floor(Math.random() * images.length)
+          setBg(`../public/${images[random_bg]}`)
 
           setGenerated(true)
         })
@@ -195,7 +201,7 @@ function App() {
     return(
         <main>
            {conversation.map((item, index) => (
-             <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none'}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 == 0 ? true: false}/>
+             <Block key={index} id={index} speaker={item.speaker} txt={item.text} style={{display: number==index ? 'block' : 'none', backgroundImage: bg}} character={item.character} pose={item.pose} emotion={item.emotion} mirror={index%2 == 0 ? true: false}/>
            ))}
 
            <button onClick={() => {saveComic()}}>

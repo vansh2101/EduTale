@@ -13,10 +13,10 @@ import ComicStack from './ComicStack';
 
 const Stack = createNativeStackNavigator();
 
-function LoginStack({onReady}) {
+function LoginStack({onReady, first}) {
   return (
     <NavigationContainer onReady={onReady}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={first}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={SignUp} />
