@@ -27,8 +27,3 @@ Login:-
 colours:-
 1) #3A4FFE - blue
 2) #242424 - black
-
-
-
-2) Find new backgrounds
-3) fix bug on explore page

@@ -23,18 +23,18 @@ export default function Explore() {
       <View style={{height: hp('73%')}}>
         <ScrollView>
           <View style={styles.main}>
-          <Card onPress={() => setPlayModal(true)}/>
-          <Card onPress={() => setPlayModal(true)}/>
-          <Card onPress={() => setPlayModal(true)}/>
-          <Card onPress={() => setPlayModal(true)}/>
-          <Card onPress={() => setPlayModal(true)}/>
+          <Card name={'Motion'} subject={'Physics'} slides={23} onPress={() => setPlayModal(true)}/>
+          <Card name={'Organic'} subject={'Chemistry'} slides={29} onPress={() => setPlayModal(true)}/>
+          <Card name={'Calculas'} subject={'Maths'} slides={42} onPress={() => setPlayModal(true)}/>
+          <Card name={'Algebra'} subject={'Maths'} slides={26} onPress={() => setPlayModal(true)}/>
+          <Card name={'Atoms'} subject={'Chemistry'} slides={23} onPress={() => setPlayModal(true)}/>
               
           </View>
 
         </ScrollView>
       </View>
 
-      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} />
+      <PlayModal visible={playModal} onPress={() => {setPlayModal(false)}} data={{name: 'Motion', subject: 'Physics', slides: 23}} />
 
     </View>
   )
@@ -56,8 +56,10 @@ const styles = StyleSheet.create({
   main: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    marginVertical: 15,
+    justifyContent: 'space-between',
     rowGap: 13,
-    marginVertical: 10
-  }
+    width: wp('92%'),
+    alignSelf: 'center'
+  },
 })
