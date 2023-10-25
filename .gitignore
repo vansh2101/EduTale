@@ -4,3 +4,6 @@ edutale/node_modules
 comic_generator/node_modules
 comic_generator/public/characterlist.json
 comic_generator/public/speechbubble.json
+comic_generator/.env
+server/.env
+server/node_modules

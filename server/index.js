@@ -4,16 +4,16 @@ const Tesseract= require('tesseract.js');
 const app = express();
 const cors = require('cors')
 
+require('dotenv').config()
+
 app.use(express.json());
 app.use(express.raw({ limit: '20mb' }));
 app.use(cors({origin: '*'}))
 
-// Define your OpenAI API key
-const OPENAI_API_KEY = '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';
 
 // Initialize the OpenAI API client
 const openai = new OpenAIApi({
-  key: OPENAI_API_KEY,
+  key: process.env.OPENAI_API_KEY,
 });
 
 app.post('/generate', async (req, res) => {

@@ -79,7 +79,7 @@ function App() {
 
     const detectEmotion = async (text) => {
       var myHeaders = new Headers();
-      myHeaders.append("apikey", "5BaIIJei28bLIhnY5HTmC7s8r1eaqget");
+      myHeaders.append("apikey", process.env.REACT_APP_EMOTION);
 
       var requestOptions = {
         method: 'POST',
