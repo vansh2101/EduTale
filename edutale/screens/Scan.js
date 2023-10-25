@@ -31,7 +31,7 @@ export default function Scan({navigation}) {
           
           const url = await firebase.storage().ref().child('ocr/ocr.jpg').getDownloadURL()
 
-          fetch('http://20.244.29.91:8000/ocr', {
+          fetch('https://edutaleser.vanshpro.co/ocr', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({imageUrl: url})
