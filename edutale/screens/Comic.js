@@ -33,7 +33,7 @@ export default function Comic({route, navigation}) {
       <WebView
         style={styles.webView}
         source={{ 
-          uri: `http://10.0.2.2:3000/${user}/${description}/${name}/${subject}`
+          uri: `https://edu-tale.vercel.app/${user}/${description}/${name}/${subject}`
         }}
         />
       </View>

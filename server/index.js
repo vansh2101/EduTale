@@ -8,7 +8,7 @@ require('dotenv').config()
 
 app.use(express.json());
 app.use(express.raw({ limit: '20mb' }));
-app.use(cors({origin: '*'}))
+app.use(cors({origin: '*', accessControlAllowOrigin: '*'}))
 
 
 // Initialize the OpenAI API client
