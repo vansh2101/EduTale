@@ -128,7 +128,7 @@ function App() {
           var context = desc
         }
 
-        fetch('http://20.244.29.91:8000/generate', {
+        fetch('https://edutaleser.vanshpro.co/generate', {
             method: 'POST',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'},
