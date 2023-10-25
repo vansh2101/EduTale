@@ -24,6 +24,7 @@ function App() {
 
     const [conversation, setConversation] = useState([])
     const [number, setNumber] = useState(-1)
+    const [loading, setLoading] = useState(true)
     
     
     const generateConversationArray = async () => {
@@ -61,7 +62,7 @@ function App() {
 
         console.log(chosen_characters)
         setConversation(arr);
-
+        setLoading(false)
         animateComic(-1, arr.length)
 
     }
@@ -118,6 +119,7 @@ function App() {
 
 
     useEffect(() => {
+      setLoading(true)
       if (!generated) {
         try{
           var context = desc.slice(0,151)
@@ -201,6 +203,10 @@ function App() {
            <button onClick={() => {saveComic()}}>
               <BsBookmarkFill size={40} color='#fff' />
             </button>
+
+            <div className='footer' style={{display: loading ? 'block' : 'none'}}>
+              Generating Comic...
+            </div>
 
        </main>
     )
