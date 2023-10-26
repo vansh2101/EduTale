@@ -178,7 +178,7 @@ function App() {
       const db = firebase.firestore()
       
       db.collection('users').doc(user).collection('comics').doc().set({
-        name: name.replace('%20', ' '),
+        name: name,
         subject: subject,
         slides: conversation.length,
         path: `${user}/${subject}/${name}`,
