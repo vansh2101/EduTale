@@ -124,10 +124,10 @@ function App() {
       setLoading(true)
       if (!generated) {
         try{
-          var context = desc.slice(0,151)
+          var context = desc.slice(0,151).replace('%20', ' ')
         }
         catch(e){
-          var context = desc
+          var context = desc.replace('%20', ' ')
         }
 
         fetch('https://edutaleser.vanshpro.co/generate', {
@@ -178,7 +178,7 @@ function App() {
       const db = firebase.firestore()
       
       db.collection('users').doc(user).collection('comics').doc().set({
-        name: name,
+        name: name.replace('%20', ' '),
         subject: subject,
         slides: conversation.length,
         path: `${user}/${subject}/${name}`,
