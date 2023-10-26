@@ -124,10 +124,10 @@ function App() {
       setLoading(true)
       if (!generated) {
         try{
-          var context = desc.slice(0,151).replace('%20', ' ')
+          var context = desc.slice(0,151)
         }
         catch(e){
-          var context = desc.replace('%20', ' ')
+          var context = desc
         }
 
         fetch('https://edutaleser.vanshpro.co/generate', {
