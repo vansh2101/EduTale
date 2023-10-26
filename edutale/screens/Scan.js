@@ -4,6 +4,7 @@ import Constant from 'expo-constants'
 import { Camera, CameraType } from 'expo-camera';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
+import {useIsFocused} from '@react-navigation/native'
 
 //firebase
 import firebase from 'firebase/compat/app'
@@ -16,6 +17,7 @@ export default function Scan({navigation}) {
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [camera, setCamera] = useState(null);
   const [loading, setLoading] = useState(false)
+  const isFocused = useIsFocused()
 
 
   const clickSnap = () => {
@@ -95,7 +97,7 @@ export default function Scan({navigation}) {
         <Ionicons name="chevron-back-sharp" size={40} color="#f3f3f3" />
       </TouchableOpacity>
 
-      <Camera style={styles.camera} type={CameraType.back} ref={ref => {setCamera(ref)}} />
+      { isFocused && <Camera style={styles.camera} type={CameraType.back} ref={ref => {setCamera(ref)}} />}
 
       <TouchableOpacity style={styles.outerCircle} onPress={clickSnap}>
         <View style={styles.circle} />
