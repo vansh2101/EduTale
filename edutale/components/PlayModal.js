@@ -24,7 +24,7 @@ export default function PlayModal({visible, onPress, onBtnPress, data, img}) {
             {img ? 
             <Image source={{uri: img}} style={styles.img} />
             :
-            <Image source={require('../assets/images/cover.jpeg')} style={styles.img} />
+            <Image source={require('../assets/images/cover.png')} style={styles.img} />
             }
 
             <Text style={styles.heading}>{data.name}</Text>

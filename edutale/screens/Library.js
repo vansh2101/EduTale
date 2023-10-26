@@ -25,6 +25,7 @@ export default function Library({navigation}) {
   const [current, setCurrent] = useState({})
   const [path, setPath] = useState('')
   const db = firebase.firestore()
+  const [curUser, setCurUser] = useState()
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -33,6 +34,9 @@ export default function Library({navigation}) {
           navigation.navigate('Home')
         }
         else{
+
+          db.collection('users').doc(user).get().then(data => {setCurUser(data.data().name)})
+
           db.collection('users').doc(user).collection('comics').get().then(data => {
             const arr = []
             data.forEach(doc => {
@@ -87,7 +91,7 @@ export default function Library({navigation}) {
 
         <View style={{marginTop: 7}}>
           <Text style={{...styles.subText, marginBottom: -10}}>Welcome Back</Text>
-          <Text style={styles.heading}>Vansh Sachdeva</Text>
+          <Text style={styles.heading}>{curUser}</Text>
         </View>
       </View>
 

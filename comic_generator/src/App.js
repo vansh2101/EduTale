@@ -25,6 +25,7 @@ function App() {
     const [conversation, setConversation] = useState([])
     const [number, setNumber] = useState(-1)
     const [loading, setLoading] = useState(true)
+    const [loadingTxt, setLoadingTxt] = useState('')
     
     
     const generateConversationArray = async () => {
@@ -119,6 +120,7 @@ function App() {
 
 
     useEffect(() => {
+      setLoadingTxt('Generating Comic...')
       setLoading(true)
       if (!generated) {
         try{
@@ -150,32 +152,39 @@ function App() {
 
     const saveComic = () => {
       console.log('start')
+      setLoadingTxt('Saving Comic. Please wait...')
+      setLoading(true)
 
       for (let i=0; i < conversation.length; i++){
         const element = document.getElementById(`${i}`)
-        const disp = element.style.display
+        // const disp = element.style.display
         element.style.display = 'block'
 
         toPng(element).then(dataUrl => {
-          element.style.display = disp
+          element.style.display = 'none'
 
           upload(dataUrl, `${i}.png`).then(() => {
             console.log('done')
+
+            if(i === conversation.length-1){
+              setLoading(false)
+              window.alert('Comic Saved Successfully')
+            }
           })
         })
-
+        
       }
-
+      
       const db = firebase.firestore()
-
+      
       db.collection('users').doc(user).collection('comics').doc().set({
         name: name,
         subject: subject,
         slides: conversation.length,
         path: `${user}/${subject}/${name}`,
       }).then(() => {
+        document.getElementById(`${number}`).style.display = 'block'
         console.log('done')
-        window.alert('Comic Saved Successfully')
       })
 
 
@@ -205,7 +214,7 @@ function App() {
             </button>
 
             <div className='footer' style={{display: loading ? 'block' : 'none'}}>
-              Generating Comic...
+              {loadingTxt}
             </div>
 
        </main>
