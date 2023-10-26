@@ -14,9 +14,11 @@ export default function Card({name, subject, slides, onPress, img}) {
   const[path, setPath] = useState()
 
   useEffect(() => {
-      firebase.storage().ref().child(`${img}/0.png`).getDownloadURL().then(uri => {
-        setPath(uri)
-      })
+      if(img){
+        firebase.storage().ref().child(`${img}/0.png`).getDownloadURL().then(uri => {
+          setPath(uri)
+        })
+      }
   }, [])
 
   return (

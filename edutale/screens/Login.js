@@ -35,7 +35,7 @@ function Login({navigation}) {
           AsyncStorage.setItem('session', data.user.email).then(data => {
               setEmail('')
               setPassword('')
-              navigation.navigate('main')
+              navigation.navigate('Library')
               setLoading(false)
           })
       })

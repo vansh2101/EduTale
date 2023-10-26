@@ -27,25 +27,29 @@ export default function Library({navigation}) {
   const db = firebase.firestore()
 
   useEffect(() => {
-    AsyncStorage.getItem('session').then(user => {
-      if(!user) {
-        navigation.navigate('Home')
-      }
-      else{
-        db.collection('users').doc(user).collection('comics').get().then(data => {
-          const arr = []
-          data.forEach(doc => {
-            arr.push(doc.data())
+    const unsubscribe = navigation.addListener('focus', () => {
+      AsyncStorage.getItem('session').then(user => {
+        if(!user) {
+          navigation.navigate('Home')
+        }
+        else{
+          db.collection('users').doc(user).collection('comics').get().then(data => {
+            const arr = []
+            data.forEach(doc => {
+              arr.push(doc.data())
+            })
+      
+            setComics(arr)
+            setLoading(false)
           })
-    
-          setComics(arr)
-          setLoading(false)
-        })
-      }
-    
+        }
+      
+      })
     })
+
+    return unsubscribe
     
-  }, [])
+  }, [navigation])
 
   const openModal = (curr) => {
     setCurrent(curr)
